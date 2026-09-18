@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Hind+Siliguri:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Outfit', 'Hind Siliguri', sans-serif;
+    background-color: #fff5f7;
+    color: #4a2e35;
+    overflow-x: hidden;
+  }
+}
+
+.font-handwriting {
+  font-family: 'Great Vibes', 'Dancing Script', cursive;
+}
+
+.font-bengali {
+  font-family: 'Hind Siliguri', sans-serif;
+}
