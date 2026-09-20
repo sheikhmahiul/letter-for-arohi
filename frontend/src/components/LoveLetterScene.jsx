@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Heart, Sparkles, MessageCircleHeart } from 'lucide-react';
 
+import { getApiUrl } from '../utils/api';
+
 export default function LoveLetterScene({ onAccept }) {
   const [noClickCount, setNoClickCount] = useState(0);
   const [noMessage, setNoMessage] = useState('');
@@ -56,23 +58,25 @@ export default function LoveLetterScene({ onAccept }) {
       console.warn('Confetti error:', e);
     }
 
-    // Submit to Laravel API backend
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-    try {
-      await fetch(`${apiUrl}/response`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          recipient_name: 'Arohi',
-          response_status: 'accepted',
-          no_click_count: noClickCount,
-        }),
-      });
-    } catch (err) {
-      console.warn('Backend API request skipped or offline:', err);
+    // Submit to Laravel API backend if available
+    const apiUrl = getApiUrl();
+    if (apiUrl) {
+      try {
+        await fetch(`${apiUrl}/response`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            recipient_name: 'Arohi',
+            response_status: 'accepted',
+            no_click_count: noClickCount,
+          }),
+        });
+      } catch (err) {
+        console.warn('Backend API request skipped or offline:', err);
+      }
     }
 
     setTimeout(() => {
