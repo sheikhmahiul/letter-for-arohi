@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SakuraPetals from './components/SakuraPetals';
 import AudioPlayer from './components/AudioPlayer';
 import EnvelopeScene from './components/EnvelopeScene';
 import LoveLetterScene from './components/LoveLetterScene';
 import CelebrationScene from './components/CelebrationScene';
-import ResponseDashboard from './components/ResponseDashboard';
-import { Heart, Activity } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export default function App() {
   const [currentScene, setCurrentScene] = useState('envelope');
   const [noClickCount, setNoClickCount] = useState(0);
-
-  // Simple client-side route handler for /response
-  useEffect(() => {
-    if (window.location.pathname === '/response') {
-      setCurrentScene('dashboard');
-    }
-  }, []);
 
   const handleOpenLetter = () => {
     setCurrentScene('letter');
@@ -55,16 +47,6 @@ export default function App() {
 
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <AudioPlayer />
-
-          <button
-            onClick={() => setCurrentScene(currentScene === 'dashboard' ? 'envelope' : 'dashboard')}
-            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full bg-pink-100/80 hover:bg-pink-200/80 border border-pink-300 text-pink-800 text-[11px] sm:text-xs font-semibold shadow-2xs transition-colors cursor-pointer shrink-0"
-            title="View Live Response Status Dashboard"
-          >
-            <Activity className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-pink-600 shrink-0" />
-            <span className="hidden sm:inline">Status</span>
-            <span>/response</span>
-          </button>
         </div>
       </header>
 
@@ -81,15 +63,11 @@ export default function App() {
         {currentScene === 'celebration' && (
           <CelebrationScene noClickCount={noClickCount} onReplay={handleReplay} />
         )}
-
-        {currentScene === 'dashboard' && (
-          <ResponseDashboard onBackToLetter={() => setCurrentScene('letter')} />
-        )}
       </main>
 
       {/* Footer */}
       <footer className="relative z-30 w-full py-4 text-center text-xs text-pink-600/80 font-medium border-t border-pink-200/50 backdrop-blur-xs bg-white/30">
-        <p>Crafted with endless love for Arohi 💖 | Powered by React & Laravel API</p>
+        <p>Crafted with endless love for Arohi 💖</p>
       </footer>
     </div>
   );
