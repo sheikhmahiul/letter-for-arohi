@@ -17,14 +17,14 @@ export default function LoveLetterScene({ onAccept }) {
     'তোমার সিদ্ধান্ত তোমারই। আমি শুধু আমার মনের কথাটা বলতে চেয়েছিলাম।',
   ];
 
-  // Bounded vertical & diagonal positions (guaranteed ZERO overlap with Yes button & ZERO container overflow)
+  // Bounded safe positions so the "No" button never overlaps Yes button, never clips, and never goes under elements
   const safePositions = [
-    { x: -50, y: -55 },  // Top-Center (Above Yes button)
-    { x: -50, y: 55 },   // Bottom-Center (Below Yes button)
-    { x: -15, y: -55 },  // Top-Right (Above & Right of Yes)
-    { x: -15, y: 55 },   // Bottom-Right (Below & Right of Yes)
-    { x: 10, y: -55 },   // Top-Far-Right (Safe from right border)
-    { x: 10, y: 55 },    // Bottom-Far-Right (Safe from right border)
+    { x: 40, y: -35 },   // Move slightly top-right
+    { x: -40, y: -35 },  // Move slightly top-left
+    { x: 50, y: 0 },     // Move right
+    { x: -50, y: 0 },    // Move left
+    { x: 20, y: -40 },   // Top slight right
+    { x: -20, y: -40 },  // Top slight left
   ];
 
   const handleNoInteraction = () => {
@@ -35,7 +35,7 @@ export default function LoveLetterScene({ onAccept }) {
     const msgIndex = Math.min(nextCount - 1, noMessages.length - 1);
     setNoMessage(noMessages[msgIndex]);
 
-    // Pick safe coordinates that move right/up/down cleanly away from Yes button
+    // Pick safe coordinates that move right/up/left cleanly
     const pos = safePositions[(nextCount - 1) % safePositions.length];
     setNoButtonPos(pos);
   };
@@ -87,20 +87,20 @@ export default function LoveLetterScene({ onAccept }) {
       transition={{ duration: 0.8 }}
       className="min-h-[85vh] flex flex-col items-center justify-center px-4 py-8 relative z-10"
     >
-      {/* Paper Card */}
-      <div className="w-full max-w-2xl bg-amber-50/95 border-2 border-pink-200 rounded-3xl p-4 sm:p-10 shadow-2xl shadow-pink-200/50 relative overflow-hidden backdrop-blur-sm">
+      {/* Paper Card - Overflow visible so moving elements are never clipped */}
+      <div className="w-full max-w-2xl bg-amber-50/95 border-2 border-pink-200 rounded-3xl p-4 sm:p-10 shadow-2xl shadow-pink-200/50 relative backdrop-blur-sm">
         
         {/* Decorative Floral/Heart Corners */}
-        <div className="absolute top-3 left-3 text-pink-300 opacity-60">
+        <div className="absolute top-3 left-3 text-pink-300 opacity-60 pointer-events-none">
           <Heart className="w-5 h-5 sm:w-6 sm:h-6 fill-pink-200" />
         </div>
-        <div className="absolute top-3 right-3 text-pink-300 opacity-60">
+        <div className="absolute top-3 right-3 text-pink-300 opacity-60 pointer-events-none">
           <Heart className="w-5 h-5 sm:w-6 sm:h-6 fill-pink-200" />
         </div>
-        <div className="absolute bottom-3 left-3 text-pink-300 opacity-60">
+        <div className="absolute bottom-3 left-3 text-pink-300 opacity-60 pointer-events-none">
           <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-300" />
         </div>
-        <div className="absolute bottom-3 right-3 text-pink-300 opacity-60">
+        <div className="absolute bottom-3 right-3 text-pink-300 opacity-60 pointer-events-none">
           <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-300" />
         </div>
 
@@ -135,7 +135,7 @@ export default function LoveLetterScene({ onAccept }) {
             আমি ইচ্ছা করলে বিশে সেপ্টেম্বরই তোমাকে সবকিছু বলে দিতে পারতাম… সেদিন তুমি আমার কথা মন দিয়ে শুনছিলে। কিন্তু আমি নিজেকে আটকে রেখেছিলাম। কারণ আমার মনে একটা নরম আশা ছিল—যদি এর মধ্যে জুপিটার তোমাকে গ্রহণ করে, তাহলে আমি নিঃশব্দে তোমাদের জীবন থেকে সরে যাবো। একজন সাধারণ পাবলিক হয়ে তোমাদের সুখের পথে কোনো ছায়া ফেলব না। তোমার হাসি যাতে কখনো ভাঙে না, সেই চিন্তাই আমাকে চুপ করে রেখেছিল।
           </p>
           <p>
-            কিন্তু আর পারছি না, আরোহী… অপেক্ষা করতে পারছি না। আমার হৃদয় আর ধরে রাখতে পারছি না এই নীরবতাকে।
+            কিন্তু আর পারছি না, আরোহী… অপেক্ষা করতে পারছি না। আমার হৃদয় আর ধরে রাখতে পারছে না এই নীরবতাকে।
           </p>
           <p>
             আরোহী, আমি জানি না তোমার চোখে আমি কতটা মূল্যবান। কিন্তু আমি এইটুকু জানি—আমি তোমাকে আমার শেষ নিঃশ্বাস পর্যন্ত ভালোবাসতে চাই। এমন ভালোবাসা দিতে চাই যেটা তোমাকে প্রতিদিন নতুন করে প্রেমের অনুভূতি দেবে, যেটা তোমাকে কখনো একা অনুভব করতে দেবে না। আমি তোমাকে জোর করব না। শুধু একবার, শুধু একবার তোমার কাছে হাত বাড়িয়ে বলতে চাই… যদি কখনো তুমিও আমার দিকে তাকাতে চাও, আমি এখানেই আছি। সারাজীবন তোমাকে না পাওয়ার সেই তীব্র regret-এর চেয়ে, আজ তোমাকে সবকিছু বলে দেওয়াই আমার কাছে অনেক বেশি মূল্যবান।
@@ -173,7 +173,7 @@ export default function LoveLetterScene({ onAccept }) {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-4 px-3 py-2 rounded-xl bg-pink-100/90 border border-pink-300 text-pink-800 text-xs sm:text-sm font-bengali font-medium flex items-center justify-center gap-1.5"
+            className="mb-4 px-3 py-2 rounded-xl bg-pink-100/90 border border-pink-300 text-pink-800 text-xs sm:text-sm font-bengali font-medium flex items-center justify-center gap-1.5 relative z-10"
           >
             <MessageCircleHeart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-600 shrink-0" />
             <span>{noMessage}</span>
@@ -194,13 +194,13 @@ export default function LoveLetterScene({ onAccept }) {
             <span>হ্যাঁ, আমি তোমার সাথেই থাকবো ❤️</span>
           </motion.button>
 
-          {/* NO Button (Playful movement) */}
+          {/* NO Button (Playful movement, z-30 to ensure it is ALWAYS on top, w-auto so it stays within container) */}
           <motion.button
             animate={{ x: noButtonPos.x, y: noButtonPos.y }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             onClick={handleNoInteraction}
             onMouseEnter={handleNoInteraction}
-            className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 font-bengali font-medium text-base shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 z-10"
+            className="w-auto px-5 py-2.5 sm:px-6 sm:py-3.5 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 font-bengali font-medium text-xs sm:text-base shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 z-30 relative shrink-0"
           >
             <span>না, Sorry 💔</span>
           </motion.button>
