@@ -71,12 +71,8 @@ export default function CelebrationScene({ noClickCount, onReplay }) {
           </p>
         </div>
 
-        {/* Stats & Interactive Replay */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-pink-200 text-xs text-pink-700 font-medium">
-          <span className="bg-pink-100/80 px-3 py-1.5 rounded-xl border border-pink-200">
-            {noClickCount > 0 ? `Playful hesitations: ${noClickCount}` : 'Accepted on first tap! 💖'}
-          </span>
-
+        {/* Interactive Replay */}
+        <div className="flex items-center justify-center pt-4 border-t border-pink-200 text-xs text-pink-700 font-medium">
           <button
             onClick={onReplay}
             className="flex items-center gap-1.5 text-pink-700 hover:text-pink-900 font-semibold cursor-pointer underline transition-colors"

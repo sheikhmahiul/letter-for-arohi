@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, RefreshCw, Clock, CheckCircle2, AlertCircle, ArrowLeft } from 'lucide-react';
+import { getApiUrl } from '../utils/api';
 
 export default function ResponseDashboard({ onBackToLetter }) {
   const [data, setData] = useState(null);
@@ -10,7 +11,12 @@ export default function ResponseDashboard({ onBackToLetter }) {
   const fetchStatus = async () => {
     setLoading(true);
     setError(null);
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+    const apiUrl = getApiUrl();
+    if (!apiUrl) {
+      setLoading(false);
+      setData(null);
+      return;
+    }
     try {
       const res = await fetch(`${apiUrl}/response`, {
         headers: { 'Accept': 'application/json' },
