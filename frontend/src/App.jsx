@@ -4,6 +4,7 @@ import AudioPlayer from './components/AudioPlayer';
 import EnvelopeScene from './components/EnvelopeScene';
 import LoveLetterScene from './components/LoveLetterScene';
 import CelebrationScene from './components/CelebrationScene';
+import RejectionScene from './components/RejectionScene';
 import { Heart } from 'lucide-react';
 
 export default function App() {
@@ -17,6 +18,10 @@ export default function App() {
   const handleAccept = (hesitationCount) => {
     setNoClickCount(hesitationCount);
     setCurrentScene('celebration');
+  };
+
+  const handleReject = () => {
+    setCurrentScene('rejection');
   };
 
   const handleReplay = () => {
@@ -57,11 +62,15 @@ export default function App() {
         )}
 
         {currentScene === 'letter' && (
-          <LoveLetterScene onAccept={handleAccept} />
+          <LoveLetterScene onAccept={handleAccept} onReject={handleReject} />
         )}
 
         {currentScene === 'celebration' && (
           <CelebrationScene noClickCount={noClickCount} onReplay={handleReplay} />
+        )}
+
+        {currentScene === 'rejection' && (
+          <RejectionScene onReplay={handleReplay} />
         )}
       </main>
 

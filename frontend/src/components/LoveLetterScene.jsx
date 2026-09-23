@@ -5,15 +5,15 @@ import { Heart, Sparkles, MessageCircleHeart } from 'lucide-react';
 
 import { getApiUrl } from '../utils/api';
 
-export default function LoveLetterScene({ onAccept }) {
+export default function LoveLetterScene({ onAccept, onReject }) {
   const [noClickCount, setNoClickCount] = useState(0);
-  const [noMessage, setNoMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNoClick = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     const nextCount = noClickCount + 1;
     setNoClickCount(nextCount);
-    setNoMessage('ওহ sorry আজকেই আমার সাথে তোমার শেষ কথা 💔');
 
     // Submit to Laravel API backend if available
     const apiUrl = getApiUrl();
@@ -35,6 +35,10 @@ export default function LoveLetterScene({ onAccept }) {
         console.warn('Backend API request skipped or offline:', err);
       }
     }
+
+    setTimeout(() => {
+      onReject();
+    }, 300);
   };
 
   const handleYesClick = async () => {
@@ -189,17 +193,7 @@ export default function LoveLetterScene({ onAccept }) {
           </p>
         </div>
 
-        {/* Gentle "No" Message Hint Box */}
-        {noMessage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mb-4 px-3 py-2 rounded-xl bg-pink-100/90 border border-pink-300 text-pink-800 text-xs sm:text-sm font-bengali font-medium flex items-center justify-center gap-1.5 relative z-10"
-          >
-            <MessageCircleHeart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-600 shrink-0" />
-            <span>{noMessage}</span>
-          </motion.div>
-        )}
+
 
         {/* Interactive Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 relative min-h-[100px] sm:min-h-[140px] py-2 sm:py-4">
