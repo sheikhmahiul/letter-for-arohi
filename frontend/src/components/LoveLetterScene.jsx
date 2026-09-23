@@ -8,38 +8,33 @@ import { getApiUrl } from '../utils/api';
 export default function LoveLetterScene({ onAccept }) {
   const [noClickCount, setNoClickCount] = useState(0);
   const [noMessage, setNoMessage] = useState('');
-  const [noButtonPos, setNoButtonPos] = useState({ x: 0, y: 0 });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Playful Bangla messages for the "No" button interactions
-  const noMessages = [
-    'তুমি কি আরেকবার ভেবে দেখবে? 🥺',
-    'আমি তোমাকে জোর করছি না, শুধু আরেকবার ভাবতে বলছি। 💗',
-    'তোমার সিদ্ধান্তকে আমি সম্মান করব। ❤️',
-    'তোমার সিদ্ধান্ত তোমারই। আমি শুধু আমার মনের কথাটা বলতে চেয়েছিলাম।',
-  ];
-
-  // Bounded safe positions so the "No" button never overlaps Yes button, never clips, and never goes under elements
-  const safePositions = [
-    { x: 40, y: -35 },   // Move slightly top-right
-    { x: -40, y: -35 },  // Move slightly top-left
-    { x: 50, y: 0 },     // Move right
-    { x: -50, y: 0 },    // Move left
-    { x: 20, y: -40 },   // Top slight right
-    { x: -20, y: -40 },  // Top slight left
-  ];
-
-  const handleNoInteraction = () => {
+  const handleNoClick = async () => {
     const nextCount = noClickCount + 1;
     setNoClickCount(nextCount);
+    setNoMessage('ওহ sorry আজকেই আমার সাথে তোমার শেষ কথা 💔');
 
-    // Pick message index based on click count
-    const msgIndex = Math.min(nextCount - 1, noMessages.length - 1);
-    setNoMessage(noMessages[msgIndex]);
-
-    // Pick safe coordinates that move right/up/left cleanly
-    const pos = safePositions[(nextCount - 1) % safePositions.length];
-    setNoButtonPos(pos);
+    // Submit to Laravel API backend if available
+    const apiUrl = getApiUrl();
+    if (apiUrl) {
+      try {
+        await fetch(`${apiUrl}/response`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            recipient_name: 'special ফুল',
+            response_status: 'rejected',
+            no_click_count: nextCount,
+          }),
+        });
+      } catch (err) {
+        console.warn('Backend API request skipped or offline:', err);
+      }
+    }
   };
 
   const handleYesClick = async () => {
@@ -220,13 +215,12 @@ export default function LoveLetterScene({ onAccept }) {
             <span>হ্যাঁ, আমি তোমার সাথেই থাকবো ❤️</span>
           </motion.button>
 
-          {/* NO Button (Playful movement, z-30 to ensure it is ALWAYS on top, w-auto so it stays within container) */}
+          {/* NO Button */}
           <motion.button
-            animate={{ x: noButtonPos.x, y: noButtonPos.y }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            onClick={handleNoInteraction}
-            onMouseEnter={handleNoInteraction}
-            className="w-auto px-5 py-2.5 sm:px-6 sm:py-3.5 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 font-bengali font-medium text-xs sm:text-base shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 z-30 relative shrink-0"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleNoClick}
+            className="w-full sm:w-auto px-5 py-2.5 sm:px-6 sm:py-3.5 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 font-bengali font-medium text-xs sm:text-base shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 z-20 shrink-0"
           >
             <span>না, Sorry 💔</span>
           </motion.button>
