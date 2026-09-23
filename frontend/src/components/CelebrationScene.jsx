@@ -67,7 +67,7 @@ export default function CelebrationScene({ noClickCount, onReplay }) {
           <p>কিন্তু আজকে সবকিছু সত্যি স্বপ্নের মতো লাগছে।</p>
           <p className="font-semibold text-rose-700">আমি চাই সারাজীবন তোমার সাথে কাটাতে।</p>
           <p className="font-handwriting text-3xl sm:text-4xl text-rose-600 font-bold pt-2">
-            I love you, Arohi. ❤️🌸
+            I love you, special ফুল. ❤️🌸
           </p>
         </div>
 

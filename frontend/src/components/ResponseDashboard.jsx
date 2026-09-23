@@ -91,7 +91,7 @@ export default function ResponseDashboard({ onBackToLetter }) {
             <div className="p-4 rounded-2xl bg-pink-50/80 border border-pink-200 flex items-center justify-between">
               <div>
                 <p className="text-xs text-pink-600 font-medium uppercase tracking-wider">Recipient Name</p>
-                <p className="text-lg font-bold text-pink-900 font-bengali">{data.recipient_name || 'Arohi'}</p>
+                <p className="text-lg font-bold text-pink-900 font-bengali">{data.recipient_name || 'special ফুল'}</p>
               </div>
               <div className="text-right">
                 <p className="text-xs text-pink-600 font-medium uppercase tracking-wider">Status</p>
@@ -126,7 +126,7 @@ export default function ResponseDashboard({ onBackToLetter }) {
           <div className="py-12 text-center text-pink-600/80 text-sm">
             <Heart className="w-10 h-10 text-pink-300 mx-auto mb-2 opacity-50" />
             <p className="font-semibold text-pink-900">No Response Recorded Yet</p>
-            <p className="text-xs mt-1">Waiting for Arohi to open the letter & respond!</p>
+            <p className="text-xs mt-1">Waiting for special ফুল to open the letter & respond!</p>
           </div>
         )}
       </div>

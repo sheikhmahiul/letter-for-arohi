@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('love_responses', function (Blueprint $table) {
             $table->id();
-            $table->string('recipient_name')->default('Arohi');
+            $table->string('recipient_name')->default('special ফুল');
             $table->string('response_status')->default('pending');
             $table->integer('no_click_count')->default(0);
             $table->timestamps();

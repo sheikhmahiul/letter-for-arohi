@@ -15,7 +15,7 @@ class LoveResponseController extends Controller
         return response()->json([
             'success' => true,
             'data' => $response ?? [
-                'recipient_name' => 'Arohi',
+                'recipient_name' => 'special ফুল',
                 'response_status' => 'pending',
                 'no_click_count' => 0,
             ]
@@ -31,7 +31,7 @@ class LoveResponseController extends Controller
         ]);
 
         $response = LoveResponse::create([
-            'recipient_name' => $validated['recipient_name'] ?? 'Arohi',
+            'recipient_name' => $validated['recipient_name'] ?? 'special ফুল',
             'response_status' => $validated['response_status'],
             'no_click_count' => $validated['no_click_count'] ?? 0,
         ]);

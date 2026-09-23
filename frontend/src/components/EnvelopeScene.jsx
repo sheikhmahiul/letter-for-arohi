@@ -27,10 +27,13 @@ export default function EnvelopeScene({ onOpenLetter }) {
           <span>Confession Letter</span>
         </div>
         <h1 className="font-handwriting text-4xl sm:text-5xl md:text-6xl text-pink-900 font-bold tracking-wide">
-          A Little Letter For You 💗
+          A Letter For special ফুল 💗
         </h1>
-        <p className="text-pink-700 text-sm sm:text-base mt-2 font-medium">
-          Tap the heart to open my heart
+        <p className="text-pink-700 text-base sm:text-lg mt-2 font-semibold">
+          From Mahiul
+        </p>
+        <p className="text-pink-500 text-xs sm:text-sm mt-1 font-medium italic">
+          (Tap the heart to open my heart)
         </p>
       </motion.div>
 
@@ -58,8 +61,11 @@ export default function EnvelopeScene({ onOpenLetter }) {
             transition={{ duration: 0.9, ease: 'easeInOut' }}
             className="absolute w-[88%] h-[80%] bg-amber-50/95 border border-pink-200 rounded-xl p-4 shadow-lg text-center flex flex-col justify-center items-center z-10"
           >
-            <p className="font-bengali text-pink-900 font-semibold text-sm sm:text-base">
-              প্রিয় আরোহী...
+            <p className="font-bengali text-pink-900 font-bold text-sm sm:text-base">
+              A Letter For special ফুল 🌸
+            </p>
+            <p className="font-bengali text-rose-600 font-semibold text-xs sm:text-sm mt-0.5">
+              From Mahiul
             </p>
             <p className="text-xs text-pink-500 mt-1 italic">
               (Opening your letter...)
@@ -110,7 +116,7 @@ export default function EnvelopeScene({ onOpenLetter }) {
         transition={{ delay: 0.6 }}
         className="text-xs text-pink-600/80 mt-6 font-medium text-center"
       >
-        Wrapped with warmth & love for <span className="font-bold text-rose-600 bg-rose-100/80 px-2 py-0.5 rounded-full border border-rose-300">Arohi 🌸</span>
+        A Letter For special ফুল • <span className="font-bold text-rose-600 bg-rose-100/80 px-2 py-0.5 rounded-full border border-rose-300">From Mahiul 🌸</span>
       </motion.p>
     </div>
   );
