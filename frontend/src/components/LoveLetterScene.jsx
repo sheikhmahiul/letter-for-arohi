@@ -58,25 +58,6 @@ export default function LoveLetterScene({ onAccept }) {
       console.warn('Confetti error:', e);
     }
 
-<<<<<<< HEAD
-    // Submit to Laravel API backend
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-    try {
-      await fetch(`${apiUrl}/response`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          recipient_name: 'special ফুল',
-          response_status: 'accepted',
-          no_click_count: noClickCount,
-        }),
-      });
-    } catch (err) {
-      console.warn('Backend API request skipped or offline:', err);
-=======
     // Submit to Laravel API backend if available
     const apiUrl = getApiUrl();
     if (apiUrl) {
@@ -88,7 +69,7 @@ export default function LoveLetterScene({ onAccept }) {
             'Accept': 'application/json',
           },
           body: JSON.stringify({
-            recipient_name: 'Arohi',
+            recipient_name: 'special ফুল',
             response_status: 'accepted',
             no_click_count: noClickCount,
           }),
@@ -96,7 +77,6 @@ export default function LoveLetterScene({ onAccept }) {
       } catch (err) {
         console.warn('Backend API request skipped or offline:', err);
       }
->>>>>>> origin/main
     }
 
     setTimeout(() => {
