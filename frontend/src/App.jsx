@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SakuraPetals from './components/SakuraPetals';
-import AudioPlayer from './components/AudioPlayer';
+
 import EnvelopeScene from './components/EnvelopeScene';
 import LoveLetterScene from './components/LoveLetterScene';
 import CelebrationScene from './components/CelebrationScene';
@@ -50,9 +50,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <AudioPlayer />
-        </div>
+
       </header>
 
       {/* Main Interactive Scene */}
