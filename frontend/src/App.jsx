@@ -45,7 +45,7 @@ export default function App() {
           <div className="flex items-center gap-1 text-xs sm:text-base font-semibold">
             <span className="text-pink-800 font-medium hidden sm:inline">Love Letter for</span>
             <span className="text-rose-600 font-bold text-xs sm:text-lg bg-rose-100/90 px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full border border-rose-300 shadow-2xs tracking-wide">
-              special ফুল 🌸
+              Sneha 🌸
             </span>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="relative z-30 w-full py-4 text-center text-xs text-pink-600/80 font-medium border-t border-pink-200/50 backdrop-blur-xs bg-white/30">
-        <p>Crafted with endless love for special ফুল 💖</p>
+        <p>Crafted with endless love for Sneha 💖</p>
       </footer>
     </div>
   );
